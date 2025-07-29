@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unity Object Controller</title>
+</head>
+<body>
+  <h1>Control Unity Object</h1>
+  <button onmousedown="startSending('up')" onmouseup="stopSending()" onmouseleave="stopSending()">Up</button>
+  <button onmousedown="startSending('down')" onmouseup="stopSending()" onmouseleave="stopSending()">Down</button>
+  <button onmousedown="startSending('left')" onmouseup="stopSending()" onmouseleave="stopSending()">Left</button>
+  <button onmousedown="startSending('right')" onmouseup="stopSending()" onmouseleave="stopSending()">Right</button>
+
+  <script>
+    let intervalId = null;
+
+    function sendCommand(dir) {
+      fetch('/command', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ direction: dir, direction_y: dir })
+      }).then(() => console.log('Sent:', dir));
+    }
+
+    function startSending(dir) {
+      // 즉시 한 번 보내고
+      sendCommand(dir);
+      // 200ms 간격으로 계속 전송
+      intervalId = setInterval(() => sendCommand(dir), 200);
+    }
+
+    function stopSending() {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+  </script>
+</body>
+</html>

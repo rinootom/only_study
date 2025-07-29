@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>API 키 발급</title>
+</head>
+<body>
+    <h1>API 키 발급 시스템</h1>
+    <input type="text" id="username" placeholder="사용자 이름 입력">
+    <button onclick="generateKey()">발급받기</button>
+    <p id="result"></p>
+
+    <script>
+        function generateKey() {
+            const username = document.getElementById('username').value;
+            fetch('/generate_key', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('result').innerText = '발급된 키: ' + data.api_key;
+            });
+        }
+    </script>
+</body>
+</html>
