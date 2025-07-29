@@ -25,8 +25,8 @@ def generate_key():
 def set_variable():
     data = request.json
     key = data.get('api_key')
-    var_name = data.get('var_name')     # <- 변수 값 셋팅
-    var_value = data.get('var_value')   # <- 변수 값 셋팅
+    var_name = data.get('var_name')     # <- 변수 값 셋팅 , 애네 값 활용하는 거임
+    var_value = data.get('var_value')   # <- 변수 값 셋팅 , 애네 값 활용하는 거임
 
     if key not in api_keys.values():
         return jsonify({'error': 'Invalid API key'}), 403
