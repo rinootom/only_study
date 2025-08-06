@@ -1,47 +1,52 @@
+import sys
+sys.setrecursionlimit(10**6)
+
 def solution(maps):
     n = len(maps)
     m = len(maps[0])
 
 
     answer = []
-    answer_mirror = []
+    visited = set()
 
 
     dx =[-1,1,0,0]
     dy =[0,0,1,-1]
 
-    for i in range(len(maps)):
-        for v in range(len(maps)):
-            if maps[i][v] in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                answer_mirror.append((i,v))
-            else:
-                answer_mirror.append(False)     
+    def dfs(x,y):
+        if (x,y) in visited or maps[x][y] == "X":
+            return 0
+        visited.add((x,y))
+        total = int(maps[x][y])
 
-    for x,y in answer_mirror:
-        for z in range(4):
-            nx = x+dx[z]
-            ny = y+dy[z]
-            if 0 <= nx < n and 0 <= ny < m :
-                if 
+        for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+            nx = x + dx
+            ny = y + dy
+            if 0 <= nx < n and 0 <= ny < m:
+                total += dfs(nx, ny)
+
+        return total
+
+    for i in range(n):
+        for v in range(m):
+            if (i,v) not in visited and maps[i][v] !="X":
+                answer.append(dfs(i,v))
 
 
-    for i in answer_mirror:
-        print(i)
-
-    return answer
-
-
-print(solution
-      (["X591X",
-      "X1X5X",
-      "X231X", 
-      "1XXX1"])
-      )
+    return sorted(answer) if answer else [-1]
 
 
 # print(solution
-#       (["XXXXX",
-#       "XXXXX",
-#       "XXXXX", 
-#       "XXXXX"])
+#       (["X591X",
+#       "X1X5X",
+#       "X231X", 
+#       "1XXX1"])
 #       )
+
+
+print(solution
+      (["XXXXX",
+      "XXXXX",
+      "XXXXX", 
+      "XXXXX"])
+      )
