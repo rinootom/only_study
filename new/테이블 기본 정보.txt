@@ -1,0 +1,28 @@
+1. 마트 정보
+CREATE TABLE mart (
+    mart_id INT PRIMARY KEY AUTO_INCREMENT,
+    mart_name VARCHAR(100) NOT NULL
+);
+
+2. 카테고리 (채소,고기,생선 분류)
+CREATE TABLE category (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50) NOT NULL,
+
+    mart_id INT NOT NULL,
+    FOREIGN KEY (mart_id)
+        REFERENCES mart(mart_id)
+        ON DELETE CASCADE
+);
+
+3. 물품
+CREATE TABLE product (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(100) NOT NULL,
+    product_quantity INT NOT NULL DEFAULT 0,
+
+    category_id INT NOT NULL,
+    FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
