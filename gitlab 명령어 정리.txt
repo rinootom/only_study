@@ -6,13 +6,18 @@ Git 설치 확인	git --version
 상태 확인	git status
 Git 초기화 (최초 1회)	git init
 브랜치 이름 설정	git branch -M main
+git switch fetch
+
 원격 저장소 확인	git remote -v
 원격 저장소 연결 (최초 1회)	git remote add origin https://gitlab.com/rinotom/poc_project.git
 파일 추가	git add .
 커밋	git commit -m "수정 내용"
 최초 업로드	git push -u origin main
 이후 업로드	
+
+git branch
 git add.
+커밋	git commit -m "수정 내용"
 git push
 git pull --rebase origin main
 git push origin main
