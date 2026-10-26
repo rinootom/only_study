@@ -11,4 +11,8 @@ Git 초기화 (최초 1회)	git init
 파일 추가	git add .
 커밋	git commit -m "수정 내용"
 최초 업로드	git push -u origin main
-이후 업로드	git push
+이후 업로드	
+git add.
+git push
+git pull --rebase origin main
+git push origin main
